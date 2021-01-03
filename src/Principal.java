@@ -46,10 +46,10 @@ public class Principal {
 
 		System.out.println(" ... Iniciando os testes Gerais ...\n");
 
-//		testarClientes();
-		testarBoletos();
-		testarTransacoes();
-		testarUsuarios();
+		testarClientes();
+//		testarBoletos();
+//		testarTransacoes();
+//		testarUsuarios();
 
 		System.out.println("\n ... Testes Gerais Finalizados ...");
 	}
@@ -159,9 +159,9 @@ public class Principal {
 
 		System.out.println("Listar Clientes: \n" + resultadoListar);
 
-		ClienteWrapper cliente = new ClienteWrapper(new Cliente("Nome Cliente",
-				"666.222.284-30", "email@email.com", "Rua", "Florian�polis",
-				"SC", "Trindade", "88036-500", "388", "Apto 824", "4832230334"));
+		ClienteWrapper cliente = new ClienteWrapper(new Cliente("Teste 003",
+				"85.608.278/0001-07", "teste003@teste.com", "Rua do Teste 003", "Pernambuco",
+				"PE", "Recife", "88036-500", "333", "Apto 003", "4832230334"));
 
 		String resultadoIncluir = boletar(METODO_CLIENTE, REQUEST_POST, cliente);
 
@@ -173,7 +173,7 @@ public class Principal {
 				+ clienteIncluir.getIdCliente(),
 				REQUEST_GET);
 
-		System.out.println("Informa��es Cliente: \n" + resultadoInformar);
+		System.out.println("Informações Cliente: \n" + resultadoInformar);
 
 		Cliente retorno = transformar(Cliente.class, resultadoInformar);
 
@@ -203,7 +203,7 @@ public class Principal {
 			String resultadoInformar = boletar(METODO_BOLETO + "/"
 					+ retornoIncluir.getIdBoleto(), REQUEST_GET);
 
-			System.out.println("Informa��es Boleto: \n" + resultadoInformar);
+			System.out.println("Informações Boleto: \n" + resultadoInformar);
 
 			Boleto retorno = transformar(Boleto.class, resultadoInformar);
 
@@ -216,14 +216,14 @@ public class Principal {
 
 		String resultadoListar = boletar(METODO_TRANSACAO, REQUEST_GET);
 
-		System.out.println("Listar Transa��es: \n" + resultadoListar);
+		System.out.println("Listar Transações: \n" + resultadoListar);
 	}
 
 	public static void testarUsuarios() throws Exception {
 
 		String resultadoInfo = boletar(METODO_USUARIO, REQUEST_GET);
 
-		System.out.println("Informa��es Usu�rio: \n" + resultadoInfo);
+		System.out.println("Informações Usuário: \n" + resultadoInfo);
 	}
 
 	private static <T extends Object> T transformar(final Class<T> objeto,
