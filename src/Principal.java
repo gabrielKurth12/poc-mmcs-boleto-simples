@@ -46,10 +46,10 @@ public class Principal {
 
 		System.out.println(" ... Iniciando os testes Gerais ...\n");
 
-		testarClientes();
-//		testarBoletos();
-//		testarTransacoes();
-//		testarUsuarios();
+//		testarClientes();
+		testarBoletos();
+		testarTransacoes();
+		testarUsuarios();
 
 		System.out.println("\n ... Testes Gerais Finalizados ...");
 	}
@@ -190,8 +190,8 @@ public class Principal {
 		if (!URL_BASE.equals(URL_PRODUCAO)) {
 
 			BoletoWrapper boleto = new BoletoWrapper(new Boleto(new BigDecimal(
-					"9.10"), "2014-08-23", "Referente Setembro de 2014",
-					"Nome do cliente", "032.313.119-00", "contato@seusite.com",
+					"9.10"), "2021-01-06", "Teste API",
+					"Teste 001", "41.151.236/0001-06", "teste001@teste.com",
 					URL_NOTIFICACAO));
 
 			String resultadoIncluir = boletar(METODO_BOLETO, REQUEST_POST, boleto);
