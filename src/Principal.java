@@ -33,6 +33,8 @@ public class Principal {
 	public static final String REQUEST_GET = "GET";
 
 	public static final String REQUEST_POST = "POST";
+	
+	public static final String REQUEST_PUT = "PUT";
 
 	public static final String METODO_CLIENTE = "/api/v1/customers";
 
@@ -41,15 +43,18 @@ public class Principal {
 	public static final String METODO_TRANSACAO = "/api/v1/transactions";
 
 	public static final String METODO_USUARIO = "/api/v1/userinfo";
+	
+	public static final String ALTERAR_CARTEIRA_PADRAO = "/api/v1/bank_billet_accounts/3519/set_default";
 
 	public static void main(String[] args) throws Exception {
 
 		System.out.println(" ... Iniciando os testes Gerais ...\n");
 
 //		testarClientes();
+//		alterarCarteiraPadrao();
 		testarBoletos();
-		testarTransacoes();
-		testarUsuarios();
+//		testarTransacoes();
+//		testarUsuarios();
 
 		System.out.println("\n ... Testes Gerais Finalizados ...");
 	}
@@ -159,57 +164,61 @@ public class Principal {
 
 		System.out.println("Listar Clientes: \n" + resultadoListar);
 
-		ClienteWrapper cliente = new ClienteWrapper(new Cliente("Teste 003",
-				"85.608.278/0001-07", "teste003@teste.com", "Rua do Teste 003", "Pernambuco",
-				"PE", "Recife", "88036-500", "333", "Apto 003", "4832230334"));
-
-		String resultadoIncluir = boletar(METODO_CLIENTE, REQUEST_POST, cliente);
-
-		Cliente clienteIncluir = transformar(Cliente.class, resultadoIncluir);
-
-		System.out.println("Incluir Clientes: \n" + resultadoIncluir);
-
-		String resultadoInformar = boletar(METODO_CLIENTE + "/"
-				+ clienteIncluir.getIdCliente(),
-				REQUEST_GET);
-
-		System.out.println("Informações Cliente: \n" + resultadoInformar);
-
-		Cliente retorno = transformar(Cliente.class, resultadoInformar);
-
-		System.out.println(retorno.getIdCliente() + " - " + retorno.getNome());
+//		ClienteWrapper cliente = new ClienteWrapper(new Cliente("Teste 003",
+//				"85.608.278/0001-07", "teste003@teste.com", "Rua do Teste 003", "Pernambuco",
+//				"PE", "Recife", "88036-500", "333", "Apto 003", "4832230334"));
+//
+//		String resultadoIncluir = boletar(METODO_CLIENTE, REQUEST_POST, cliente);
+//
+//		Cliente clienteIncluir = transformar(Cliente.class, resultadoIncluir);
+//
+//		System.out.println("Incluir Clientes: \n" + resultadoIncluir);
+//
+//		String resultadoInformar = boletar(METODO_CLIENTE + "/"
+//				+ clienteIncluir.getIdCliente(),
+//				REQUEST_GET);
+//
+//		System.out.println("Informações Cliente: \n" + resultadoInformar);
+//
+//		Cliente retorno = transformar(Cliente.class, resultadoInformar);
+//
+//		System.out.println(retorno.getIdCliente() + " - " + retorno.getNome());
 	}
 
 	public static void testarBoletos() throws Exception {
 
-		String resultadoListar = boletar(METODO_BOLETO, REQUEST_GET);
+		String resultadoListar = boletar(METODO_BOLETO + "/376515", REQUEST_GET);
 
 		System.out.println("Listar Boletos: \n" + resultadoListar);
 
 		// Para garantir que n�o ser� gerado um Boleto Teste em Produ��o
-		if (!URL_BASE.equals(URL_PRODUCAO)) {
-
-			BoletoWrapper boleto = new BoletoWrapper(new Boleto(new BigDecimal(
-					"9.10"), "2021-01-06", "Teste API",
-					"Teste 001", "41.151.236/0001-06", "teste001@teste.com",
-					URL_NOTIFICACAO));
-
-			String resultadoIncluir = boletar(METODO_BOLETO, REQUEST_POST, boleto);
-
-			System.out.println("Incluir Boleto: \n" + resultadoIncluir);
-
-			Boleto retornoIncluir = transformar(Boleto.class, resultadoIncluir);
-
-			String resultadoInformar = boletar(METODO_BOLETO + "/"
-					+ retornoIncluir.getIdBoleto(), REQUEST_GET);
-
-			System.out.println("Informações Boleto: \n" + resultadoInformar);
-
-			Boleto retorno = transformar(Boleto.class, resultadoInformar);
-
-			System.out.println(retorno.getIdBoleto() + " - "
-					+ retorno.getDescricao());
-		}
+//		if (!URL_BASE.equals(URL_PRODUCAO)) {
+//
+//			BoletoWrapper boleto = new BoletoWrapper(new Boleto(new BigDecimal(
+//					"100.00"), "2021-04-06", "Teste API novo cliente",
+//					"Gark", "16.895.717/0001-89	", "gark@mail.com",
+//					URL_NOTIFICACAO));
+//
+//			String resultadoIncluir = boletar(METODO_BOLETO, REQUEST_POST, boleto);
+//
+//			System.out.println("Incluir Boleto: \n" + resultadoIncluir);
+//
+//			Boleto retornoIncluir = transformar(Boleto.class, resultadoIncluir);
+//
+//			String resultadoInformar = boletar(METODO_BOLETO + "/"
+//					+ retornoIncluir.getIdBoleto(), REQUEST_GET);
+//
+//			System.out.println("Informações Boleto: \n" + resultadoInformar);
+//
+//			Boleto retorno = transformar(Boleto.class, resultadoInformar);
+//
+//			System.out.println(retorno.getIdBoleto() + " - "
+//					+ retorno.getDescricao());
+//		}
+	}
+	
+	public static void alterarCarteiraPadrao() throws Exception {
+		boletar(ALTERAR_CARTEIRA_PADRAO, REQUEST_PUT, new Carteira(true));
 	}
 
 	public static void testarTransacoes() throws Exception {
