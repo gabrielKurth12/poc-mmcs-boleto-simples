@@ -187,34 +187,34 @@ public class Principal {
 
 	public static void testarBoletos() throws Exception {
 
-		String resultadoListar = boletar(METODO_BOLETO + "/376515", REQUEST_GET);
+		String resultadoListar = boletar(METODO_BOLETO, REQUEST_GET);
 
 		System.out.println("Listar Boletos: \n" + resultadoListar);
 
 		// Para garantir que n�o ser� gerado um Boleto Teste em Produ��o
-//		if (!URL_BASE.equals(URL_PRODUCAO)) {
-//
-//			BoletoWrapper boleto = new BoletoWrapper(new Boleto(new BigDecimal(
-//					"100.00"), "2021-04-06", "Teste API novo cliente",
-//					"Gark", "16.895.717/0001-89	", "gark@mail.com",
-//					URL_NOTIFICACAO));
-//
-//			String resultadoIncluir = boletar(METODO_BOLETO, REQUEST_POST, boleto);
-//
-//			System.out.println("Incluir Boleto: \n" + resultadoIncluir);
-//
-//			Boleto retornoIncluir = transformar(Boleto.class, resultadoIncluir);
-//
-//			String resultadoInformar = boletar(METODO_BOLETO + "/"
-//					+ retornoIncluir.getIdBoleto(), REQUEST_GET);
-//
-//			System.out.println("Informações Boleto: \n" + resultadoInformar);
-//
-//			Boleto retorno = transformar(Boleto.class, resultadoInformar);
-//
-//			System.out.println(retorno.getIdBoleto() + " - "
-//					+ retorno.getDescricao());
-//		}
+		if (!URL_BASE.equals(URL_PRODUCAO)) {
+
+			BoletoWrapper boleto = new BoletoWrapper(new Boleto(new BigDecimal(
+					"1000.00"), "2021-04-06", "Teste API novo cliente",
+					"Gark", "16.895.717/0001-89	", "gark@mail.com",
+					URL_NOTIFICACAO, "3520"));
+			
+			String resultadoIncluir = boletar(METODO_BOLETO, REQUEST_POST, boleto);
+
+			System.out.println("Incluir Boleto: \n" + resultadoIncluir);
+
+			Boleto retornoIncluir = transformar(Boleto.class, resultadoIncluir);
+
+			String resultadoInformar = boletar(METODO_BOLETO + "/"
+					+ retornoIncluir.getIdBoleto(), REQUEST_GET);
+
+			System.out.println("Informações Boleto: \n" + resultadoInformar);
+
+			Boleto retorno = transformar(Boleto.class, resultadoInformar);
+
+			System.out.println(retorno.getIdBoleto() + " - "
+					+ retorno.getDescricao());
+		}
 	}
 	
 	public static void alterarCarteiraPadrao() throws Exception {

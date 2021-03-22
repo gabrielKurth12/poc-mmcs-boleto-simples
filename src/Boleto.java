@@ -79,6 +79,9 @@ public class Boleto implements Serializable {
 
 	@SerializedName("created_via_api")
 	Boolean incluidoIntegracao;
+	
+	@SerializedName("bank_billet_account_id")
+	String carteira;
 
 	public Boleto(BigDecimal valor, String dataVencimento, String descricao,
 			String idCliente, String urlNotificacao) {
@@ -92,7 +95,7 @@ public class Boleto implements Serializable {
 
 	public Boleto(BigDecimal valor, String dataVencimento, String descricao,
 			String nomeCliente, String cpfCnpjCliente, String emailCliente,
-			String urlNotificacao) {
+			String urlNotificacao, String carteira) {
 		super();
 		this.valor = valor;
 		this.dataVencimento = dataVencimento;
@@ -101,6 +104,7 @@ public class Boleto implements Serializable {
 		this.cpfCnpjCliente = cpfCnpjCliente;
 		this.emailCliente = emailCliente;
 		this.urlNotificacao = urlNotificacao;
+		this.carteira = carteira;
 	}
 
 	public Boleto(BigDecimal valor, String dataVencimento, String descricao,
